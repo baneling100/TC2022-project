@@ -12,6 +12,16 @@ $ pip install kaggle  # download kaggle API
 $ kaggle datasets download -d balabaskar/harry-potter-books-corpora-part-1-7  # download dataset
 ```
 
+You may also use the provided script to create larger input data.
+```
+$ python3 pattern-gen.py
+>> Enter max pattern length (default: 1000) >>
+>> Enter number of patterns (default: 1000) >>
+$ python3 text-gen.py
+>> Enter number of repetitions for input generation (default: 5000) >>
+```
+The generated input will be written to `input.txt`.
+
 ## How to compile and run
 Just execute Makefile, then you can get some computation time results.
 ```
