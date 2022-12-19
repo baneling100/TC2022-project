@@ -40,4 +40,13 @@ $ make
 $ make run
 ```
 
-## Results: TODO
+## Results
+
+In our environment (Ryzen 9 5950x with 64GB RAM, Rocky Linux 9.1), we observed the following running times:
+|                         | HarryPotter (N~=6.68M) | Random (N~=11.47M) |
+|-------------------------|------------------------|--------------------|
+| Suffix Array            | 1.681s                 | 4.795s             |
+| Height Array (naive)    | 0.127s                 | 6.056s             |
+| Height Array (Kasai)    | 0.107s                 | 0.169s             |
+| Tree Traversal (naive)  | 0.204s                 | 2.728s             |
+| Tree Traversal (w/ LCP) | 0.094s                 | 0.159s             |
