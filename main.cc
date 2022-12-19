@@ -50,39 +50,45 @@ void Test(int n, char text[]) {
   int *pos = (int *)malloc(sizeof(int) * n);
   int *naive = (int *)malloc(sizeof(int) * n);
   int *kasai = (int *)malloc(sizeof(int) * n);
-  std::vector<std::tuple<int, int, int>> result;
+  std::vector<std::tuple<int, int, int>> naiveRes, kasaiRes;
 
   auto begin = std::chrono::high_resolution_clock::now();
   SuffixArray(n, text, pos);
   auto end = std::chrono::high_resolution_clock::now();
   auto elapsed =
       std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
-  printf("SuffixArray: %lf\n", elapsed.count() * 1e-9);
+  printf("    SuffixArray: %lf\n", elapsed.count() * 1e-9);
 
   begin = std::chrono::high_resolution_clock::now();
   NaiveHeight(n, text, pos, naive);
   end = std::chrono::high_resolution_clock::now();
   elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
-  printf("NaiveHeight: %lf\n", elapsed.count() * 1e-9);
+  printf("    NaiveHeight: %lf\n", elapsed.count() * 1e-9);
 
   begin = std::chrono::high_resolution_clock::now();
   KasaiHeight(n, text, pos, kasai);
   end = std::chrono::high_resolution_clock::now();
   elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
-  printf("KasaiHeight: %lf\n", elapsed.count() * 1e-9);
+  printf("    KasaiHeight: %lf\n", elapsed.count() * 1e-9);
 
   // correctness check
   for (int i = 1; i < n; i++)
     if (naive[i] != kasai[i]) {
-      printf("wrong\n");
+      printf("    Wrong\n");
       break;
     }
 
   begin = std::chrono::high_resolution_clock::now();
-  TraverseWithArray(n, pos, kasai, result);
+  TraverseNaively(n, text, pos, naiveRes);
   end = std::chrono::high_resolution_clock::now();
   elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
-  printf("TraverseWithArray: %lf\n", elapsed.count() * 1e-9);
+  printf("    TraverseNaively: %lf\n", elapsed.count() * 1e-9);
+
+  begin = std::chrono::high_resolution_clock::now();
+  TraverseWithArray(n, pos, kasai, kasaiRes);
+  end = std::chrono::high_resolution_clock::now();
+  elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
+  printf("    TraverseWithArray: %lf\n", elapsed.count() * 1e-9);
 
   free(pos);
   free(naive);
@@ -91,10 +97,12 @@ void Test(int n, char text[]) {
 
 int main() {
   int n;
+  printf("HarryPotter\n");
   char *text = ReadHarryPotter(&n);
   Test(n, text);
   free(text);
 
+  printf("Random\n");
   text = ReadRandomText(&n);
   Test(n, text);
   free(text);

@@ -50,15 +50,14 @@ void TraverseWithArray(int n, int pos[], int height[],
                        std::vector<std::tuple<int, int, int>> &result);
 
 /**
- * @brief A naive algorithm that traverse only with suffix array and binary
- * search.
+ * @brief A naive algorithm that traverse only with suffix array.
  *
  * @param n length of pos
  * @param text
  * @param pos suffix array
  * @param result result vector
  */
-void TraverseWithBinary(int n, char text[], int pos[],
-                        std::vector<std::tuple<int, int, int>> &result);
+void TraverseNaively(int n, char text[], int pos[],
+                     std::vector<std::tuple<int, int, int>> &result);
 
 #endif // _lcp_h
