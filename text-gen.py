@@ -25,5 +25,5 @@ for i in range(repeats):
         else:
             str_build_list.append(pattern)
 
-with open("input.txt", "w", encoding="utf-8") as f:
+with open("random-new.txt", "w", encoding="utf-8") as f:
     f.write("".join(str_build_list) + "\n")
